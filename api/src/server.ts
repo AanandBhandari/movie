@@ -26,7 +26,7 @@ app.use("/api", router);
 
 //test root route
 app.get("/", async (req: Request, res: Response) => {
-  res.send("Hello Outside!");
+  res.send("Helloworld!");
 });
 
 //404 error handler
