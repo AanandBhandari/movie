@@ -10,10 +10,10 @@ import {
 import { uploader } from "../middleware/uploader";
 const router = Router();
 
-router
-  .route("/")
-  .get(getDirectors)
-  .post(uploader, directorSchema, validator, addDirector);
+router.route("/").get(getDirectors);
+//   .post(uploader, directorSchema, validator, addDirector);
+
+// router.post("/", uploader, addDirector);
 
 router.route("/:id").get(getDirector).delete(deleteDirector);
 

@@ -5,6 +5,7 @@ import { getRouteName } from "../utils/helper";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log("multer");
     let type = getRouteName(req.url);
     switch (type) {
       case "director":
@@ -17,7 +18,7 @@ const storage = multer.diskStorage({
         break;
       default:
         checkIfDirectoryExits("uploads");
-        cb(null, path.join(__dirname, "/../public/uploads/"));
+        cb(null, path.join(__dirname, "/../public/"));
         break;
     }
   },
@@ -28,10 +29,10 @@ const storage = multer.diskStorage({
     );
   },
 });
+
 export const uploader = multer({
   storage,
-  limits: { fileSize: 209715200 },
-}).any();
+}).single("image");
 
 function checkIfDirectoryExits(directoryName: string) {
   let fullPath = path.join(__dirname, `/../public/${directoryName}/`);

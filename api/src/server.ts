@@ -5,16 +5,16 @@ import cors from "cors";
 import dbConnection from "./utils/dbConnection";
 import { failure } from "./utils/helper";
 import router from "./routes";
+import { uploader } from "./middleware/uploader";
 
 dotenv.config();
 const app: any = express();
 //db connection
 dbConnection();
 //server middleware
-app.use(express.json());
-app.use(express.static(__dirname + "/public"));
+// app.use(express.static(__dirname + "/public"));
 app.use(cors());
-app.use(express.json());
+// app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
@@ -22,7 +22,12 @@ app.use(
 );
 
 //routes
-app.use("/api", router);
+// app.use("/api", router);
+
+app.post("/api/director", uploader, (req, res) => {
+  // console.log(req.body);
+  return res.json("fdsf");
+});
 
 //test root route
 app.get("/", async (req: Request, res: Response) => {
@@ -35,7 +40,7 @@ app.use("*", (req: Request, res: Response) =>
 );
 
 // Global route error handling middleware
-app.use(function (err: Error, req: any, res: Response, next: NextFunction) {
+app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
   console.log("****SERVER_ERROR****");
   console.log(err);
   return res.status(500).json(failure(err.message || "Something went wrong!"));
