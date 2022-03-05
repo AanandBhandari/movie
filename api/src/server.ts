@@ -5,16 +5,15 @@ import cors from "cors";
 import dbConnection from "./utils/dbConnection";
 import { failure } from "./utils/helper";
 import router from "./routes";
-import { uploader } from "./middleware/uploader";
 
 dotenv.config();
-const app: any = express();
+const app: Application = express();
 //db connection
 dbConnection();
 //server middleware
-// app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public"));
 app.use(cors());
-// app.use(express.json());
+app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
@@ -22,12 +21,7 @@ app.use(
 );
 
 //routes
-// app.use("/api", router);
-
-app.post("/api/director", uploader, (req, res) => {
-  // console.log(req.body);
-  return res.json("fdsf");
-});
+app.use("/api", router);
 
 //test root route
 app.get("/", async (req: Request, res: Response) => {

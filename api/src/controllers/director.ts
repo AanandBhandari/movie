@@ -1,12 +1,16 @@
 import { Request, Response } from "express";
 import { success, failure } from "../utils/helper";
 import Director from "../models/Director";
-import { Director as DirectorInterface } from "src/interfaces/Director.interface";
+import fs from "fs";
+import { Director as DirectorInterface } from "../interfaces/Director.interface";
+import Movie from "../models/Movie";
 
-export const addDirector = async (req: any, res: Response) => {
-  console.log(req.file);
-  return res.json(success("Successfully added director."));
+export const addDirector = async (req: Request, res: Response) => {
   const { name, description }: DirectorInterface = req.body;
+
+  if (!req.file) {
+    return res.status(403).json(failure("No image provided"));
+  }
 
   const user = await Director.findOne({ name });
   if (user) {
@@ -29,7 +33,7 @@ export const getDirectors = async (req: Request, res: Response) => {
 
 export const getDirector = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const director = await Director.findById(id).populate("director name");
+  const director = await Director.findById(id);
   if (!director) {
     return res.status(404).json(failure("Director not found."));
   }
@@ -38,6 +42,20 @@ export const getDirector = async (req: Request, res: Response) => {
 
 export const deleteDirector = async (req: Request, res: Response) => {
   const { id } = req.params;
-  await Director.findByIdAndDelete(id);
+  let director = await Director.findByIdAndDelete(id);
+
+  // console.log({ director });
+
+  //clear movies and director image
+  await Movie.deleteMany({ director: id }).exec();
+  let image = director.image;
+  if (image) {
+    image = image.replace(process.env.SITE, "");
+    let path = `${__dirname}/../public${image}`;
+    console.log(path, fs.existsSync(path));
+    if (fs.existsSync(path)) {
+      fs.unlinkSync(path);
+    }
+  }
   return res.json(success("Successfully deleted director."));
 };

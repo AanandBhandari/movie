@@ -1,8 +1,4 @@
-import {
-  validationResult,
-  ValidationError,
-  Result,
-} from "express-validator";
+import { validationResult, ValidationError, Result } from "express-validator";
 import { failure } from "../../utils/helper";
 
 const _validationResult = (req) => {
@@ -13,8 +9,11 @@ const _validationResult = (req) => {
       messages.push(i);
     }
   }
-  console.log("****VALIDATION ERRORS****");
-  console.log(messages);
+  if (messages.length > 0) {
+    console.log("****VALIDATION ERRORS****");
+    console.log(messages);
+  }
+
   return messages.map((error) => error.msg)[0] || "";
 };
 
