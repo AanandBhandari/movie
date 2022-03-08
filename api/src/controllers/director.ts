@@ -44,15 +44,12 @@ export const deleteDirector = async (req: Request, res: Response) => {
   const { id } = req.params;
   let director = await Director.findByIdAndDelete(id);
 
-  // console.log({ director });
-
   //clear movies and director image
   await Movie.deleteMany({ director: id }).exec();
   let image = director.image;
   if (image) {
     image = image.replace(process.env.SITE, "");
     let path = `${__dirname}/../public${image}`;
-    console.log(path, fs.existsSync(path));
     if (fs.existsSync(path)) {
       fs.unlinkSync(path);
     }
