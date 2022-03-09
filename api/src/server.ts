@@ -12,7 +12,7 @@ const app: Application = express();
 //db connection
 dbConnection();
 //server middleware
-app.use(express.static(__dirname + "/public"));
+app.use("/",express.static(__dirname + "/public"));
 app.use(cors());
 app.use(express.json());
 app.use(
