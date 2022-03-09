@@ -1,16 +1,6 @@
-.App-header {
-  background-color: #111;
-  height: 60px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
+.App {
+  display: flex;
+  justify-content: center;
 }
 
 @keyframes App-logo-spin {
@@ -75,7 +65,6 @@
   }
 }
 
-/* The Close Button */
 .close {
   font-size: 36px;
   font-weight: bold;

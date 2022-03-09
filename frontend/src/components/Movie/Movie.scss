@@ -1,9 +1,29 @@
+.movie {
+  display: flex;
+  padding: 12px;
+  align-items: start;
+  justify-content: space-around;
+  width: 360px;
+  border: 1px solid #e5e5e5;
+  margin-top: 25px;
+  // box-shadow: 8px 8px 14px #bfbfbf;
+}
+
+.movie:hover {
+  cursor: pointer;
+  box-shadow: 5px 6px 14px #bfbfbf;
+}
+
+.movie__info {
+  text-align: left;
+  line-height: 0.5;
+}
+
 .movie__poster {
-  box-shadow: 0 0 35px black;
-  height: 15rem;
+  height: 10rem;
+  width: 12rem;
 }
 
 .movie__directorName {
-  color: red;
   cursor: pointer;
 }

@@ -13,7 +13,7 @@ const MoviesList = () => {
     fetchMovies();
   }, []);
   return (
-    <div className="movieList__movieGrid">
+    <div>
       {movies.map((movie: MovieInterface) => (
         <Movie key={movie._id} movie={movie} />
       ))}
