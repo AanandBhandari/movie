@@ -19,7 +19,7 @@ app.use(
   express.urlencoded({
     extended: true,
   })
-);
+);  
 
 //routes
 app.use("/api", router);
@@ -30,7 +30,9 @@ app.get("/test", async (req: Request, res: Response) => {
 });
 // static files and serve  react app
 if (process.env.NODE_ENV === 'production') {
-  app.use('/frontend',express.static(path.join(__dirname, '../../frontend', 'build')));
+  app.use('/',express.static(path.join(__dirname, '../../frontend', 'build')));
+  // app.use("/",express.static(__dirname + "/public"));
+  
   app.get('/*', (req:Request, res:Response) => {
     res.sendFile(path.join(__dirname, '../../frontend', 'build', 'index.html'));
   })
