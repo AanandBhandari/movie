@@ -2,6 +2,7 @@ import express, { Application, Request, Response, NextFunction } from "express";
 require("express-async-errors");
 import * as dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
 import dbConnection from "./utils/dbConnection";
 import { failure } from "./utils/helper";
 import router from "./routes";
@@ -24,9 +25,16 @@ app.use(
 app.use("/api", router);
 
 //test root route
-app.get("/", async (req: Request, res: Response) => {
+app.get("/test", async (req: Request, res: Response) => {
   res.send("Helloworld!");
 });
+// static files and serve  react app
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../frontend', 'build')));
+  app.get('/*', (req:Request, res:Response) => {
+    res.sendFile(path.join(__dirname, '../../frontend', 'build', 'index.html'));
+  })
+}
 
 //404 error handler
 app.use("*", (req: Request, res: Response) =>

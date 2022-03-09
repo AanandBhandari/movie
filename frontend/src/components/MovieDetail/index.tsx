@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GlobalModalContext } from "../../context/Modal";
+import { ModalContext } from "../../context/Modal";
 import toast from "react-hot-toast";
 import "./MovieDetail.scss";
 import { getMovie } from "../../actions/movie";
@@ -16,7 +16,7 @@ const toastStyle = {
 };
 
 const MovieDetail = () => {
-  const { setVisible, setContent } = useContext<any>(GlobalModalContext);
+  const { setVisible, setContent } = useContext<any>(ModalContext);
   const [movie, setMovie] = useState<MovieInterface | null>(null);
 
   const [isFav, setIsFav] = useState<boolean>(false);
