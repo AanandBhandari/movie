@@ -30,7 +30,7 @@ app.get("/test", async (req: Request, res: Response) => {
 });
 // static files and serve  react app
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../frontend', 'build')));
+  app.use('/frontend',express.static(path.join(__dirname, '../../frontend', 'build')));
   app.get('/*', (req:Request, res:Response) => {
     res.sendFile(path.join(__dirname, '../../frontend', 'build', 'index.html'));
   })
