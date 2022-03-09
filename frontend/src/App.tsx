@@ -11,7 +11,7 @@ const App = () => {
   Axios.defaults.baseURL = API_URL;
   return (
     <ModalContextProvider>
-      <Router>
+      <Router basename="/">
         <div className="App">
           <Modal />
           <Toaster position="bottom-center" reverseOrder={false} />
