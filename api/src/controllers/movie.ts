@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import fs from "fs";
 import { success, failure } from "../utils/helper";
 import Movie from "../models/Movie";
 import { Movie as MovieInterface } from "src/interfaces/Movie.interface";
@@ -42,19 +41,6 @@ export const getMovie = async (req: Request, res: Response) => {
 
 export const deleteMovie = async (req: Request, res: Response) => {
   const { id } = req.params;
-  let movie = await Movie.findByIdAndDelete(id);
-
-  console.log({ movie });
-
-  //clear movies and movie image
-  await Movie.deleteMany({ director: id });
-  let image = movie.image;
-  if (image) {
-    image = image.replace(process.env.SITE, "");
-    let path = `${__dirname}/../public${image}`;
-    if (fs.existsSync(path)) {
-      fs.unlinkSync(path);
-    }
-  }
+  await Movie.findOneAndDelete({_id: id});
   return res.json(success("Successfully deleted movie."));
 };

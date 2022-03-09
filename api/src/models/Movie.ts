@@ -15,22 +15,21 @@ const MovieSchema = new Schema(
   { timestamps: true }
 );
 
-// MovieSchema.post(
-//   "deleteOne",
-//   { query: false, document: true },
-//   function (doc: Movie, next: Function) {
-//     //Remove movie image from storage
-//     console.log({ doc });
-//     let image = doc.image;
-//     if (image) {
-//       image = image.replace(process.env.SITE, "");
-//       let path = `${__dirname}/../${image}`;
-//       if (fs.existsSync(path)) {
-//         fs.unlinkSync(path);
-//       }
-//     }
-//     next();
-//   }
-// );
+MovieSchema.post(
+  "deleteOne",
+  { query: true, document: false },
+  function (doc: Movie, next: Function) {
+    //Remove movie image from storage
+    let image = doc.image;
+    if (image) {
+      image = image.replace(process.env.SITE, "");
+      let path = `${__dirname}/../public${image}`;
+      if (fs.existsSync(path)) {
+        fs.unlinkSync(path);
+      }
+    }
+    next();
+  }
+);
 
 export default model<Movie, MovieModel>("movie", MovieSchema);

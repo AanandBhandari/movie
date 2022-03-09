@@ -11,8 +11,11 @@
   "author": "Aanand Bhandari",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.26.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-hot-toast": "^2.2.0",
+    "react-router-dom": "^6.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -25,7 +28,7 @@
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
-    "@typescript-eslint/parser": "^4.15.0",
+    "@typescript-eslint/parser": "^5.14.0",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.2",
@@ -43,6 +46,8 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "react-refresh": "^0.9.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
     "style-loader": "^2.0.0",
     "typescript": "^4.1.5",
     "webpack": "^5.21.2",

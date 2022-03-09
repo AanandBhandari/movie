@@ -16,9 +16,10 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
-    'plugin:jsx-a11y/recommended',
+    // 'plugin:jsx-a11y/recommended',
     'plugin:eslint-comments/recommended',
-    'prettier/@typescript-eslint',
+    'prettier',
+    'prettier/@typescript-eslint',  
     'plugin:prettier/recommended',
   ],
   rules: {
@@ -28,6 +29,8 @@ module.exports = {
     'react/prop-types': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
+    // "jsx-a11y/click-events-have-key-events": 'off',
+    // "jsx-ally/no-noninteractive-element-to-interactive-role": 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
 }

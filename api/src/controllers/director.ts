@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
 import { success, failure } from "../utils/helper";
 import Director from "../models/Director";
-import fs from "fs";
 import { Director as DirectorInterface } from "../interfaces/Director.interface";
-import Movie from "../models/Movie";
 
 export const addDirector = async (req: Request, res: Response) => {
   const { name, description }: DirectorInterface = req.body;
@@ -42,17 +40,7 @@ export const getDirector = async (req: Request, res: Response) => {
 
 export const deleteDirector = async (req: Request, res: Response) => {
   const { id } = req.params;
-  let director = await Director.findByIdAndDelete(id);
+  await Director.findOneAndDelete({_id:id});
 
-  //clear movies and director image
-  await Movie.deleteMany({ director: id }).exec();
-  let image = director.image;
-  if (image) {
-    image = image.replace(process.env.SITE, "");
-    let path = `${__dirname}/../public${image}`;
-    if (fs.existsSync(path)) {
-      fs.unlinkSync(path);
-    }
-  }
   return res.json(success("Successfully deleted director."));
 };
