@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { ModalContext } from "../context/Modal";
+import { Context } from "../context";
 
 const Modal = () => {
-  const { visible, content, setVisible, setContent } =
-    useContext<any>(ModalContext);
+  const { visible, content, setVisible, setContent } = useContext<any>(Context);
 
   return (
     <div id="myModal" className="modal" style={{ display: visible }}>

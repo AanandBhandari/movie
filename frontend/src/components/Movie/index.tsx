@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ModalContext } from "../../context/Modal";
+import { Context } from "../../context";
 import type { MovieProps } from "./Move.type";
 import "./Movie.scss";
 
 const Movie = ({ movie }: MovieProps) => {
-  const { setContent, setVisible } = useContext<any>(ModalContext);
+  const { setContent, setVisible } = useContext<any>(Context);
   const navigate = useNavigate();
   return (
     <div className="movie" onClick={() => navigate(`/${movie._id}`)}>

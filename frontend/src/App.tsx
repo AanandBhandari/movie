@@ -5,12 +5,12 @@ import "./App.css";
 import MoviesList from "./components/MovieList";
 import MovieDetail from "./components/MovieDetail";
 import Modal from "./components/Modal";
-import ModalContextProvider from "./context/Modal";
+import ContextProvider from "./context";
 import { API_URL } from "./utils/Constant";
 const App = () => {
   Axios.defaults.baseURL = API_URL;
   return (
-    <ModalContextProvider>
+    <ContextProvider>
       <Router basename="/">
         <div className="App">
           <Modal />
@@ -21,7 +21,7 @@ const App = () => {
           </Routes>
         </div>
       </Router>
-    </ModalContextProvider>
+    </ContextProvider>
   );
 };
 

@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { getMovies } from "../../actions/movie";
 import Movie from "../../components/Movie";
+import { Context } from "../../context";
 import { Movie as MovieInterface } from "../../interface/Movie.interface";
 import "./MovieList.scss";
 const MoviesList = () => {
-  const [movies, setMovies] = useState<MovieInterface[]>([]);
+  const { movies, setMovies } = useContext<any>(Context);
   const fetchMovies = async () => {
     const movies = await getMovies();
     setMovies(movies);
