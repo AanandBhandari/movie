@@ -7,13 +7,13 @@ import {
   getDirector,
   getDirectors,
 } from "../controllers/director";
-import { uploader } from "../middleware/uploader";
+// import { uploader } from "../middleware/uploader";
 const router = Router();
 
 router
   .route("/")
   .get(getDirectors)
-  .post(uploader, directorSchema, validator, addDirector);
+  .post(directorSchema, validator, addDirector);
 
 router.route("/:id").get(getDirector).delete(deleteDirector);
 

@@ -4,19 +4,19 @@ import Director from "../models/Director";
 import { Director as DirectorInterface } from "../interfaces/Director.interface";
 
 export const addDirector = async (req: Request, res: Response) => {
-  const { name, description }: DirectorInterface = req.body;
+  const { name, description, image }: DirectorInterface = req.body;
 
-  if (!req.file) {
-    return res.status(403).json(failure("No image provided"));
-  }
+  // if (!req.file) {
+  //   return res.status(403).json(failure("No image provided"));
+  // }
 
   const user = await Director.findOne({ name });
   if (user) {
     return res.status(400).json(failure("User already exits."));
   }
-  const image = req.file
-    ? `${process.env.SITE}/director/${req.file.filename}`
-    : "";
+  // const image = req.file
+  //   ? `${process.env.SITE}/director/${req.file.filename}`
+  //   : "";
   let newDirector = new Director({ name, description, image });
   await newDirector.save();
   return res

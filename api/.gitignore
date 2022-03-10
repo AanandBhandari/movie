@@ -1,4 +1,4 @@
-# /src/public
+/src/public
 /node_modules
 /dist
 .env

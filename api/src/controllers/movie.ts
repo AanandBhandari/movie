@@ -4,19 +4,19 @@ import Movie from "../models/Movie";
 import { Movie as MovieInterface } from "src/interfaces/Movie.interface";
 
 export const addMovie = async (req: Request, res: Response) => {
-  const { name, description, genre, director }: MovieInterface = req.body;
+  const { name, description, genre, director, image }: MovieInterface = req.body;
 
-  if (!req.file) {
-    return res.status(403).json(failure("No image provided"));
-  }
+  // if (!req.file) {
+  //   return res.status(403).json(failure("No image provided"));
+  // }
 
   const user = await Movie.findOne({ name });
   if (user) {
     return res.status(400).json(failure("Movie already exits."));
   }
-  const image = req.file
-    ? `${process.env.SITE}/movie/${req.file.filename}`
-    : "";
+  // const image = req.file
+  //   ? `${process.env.SITE}/movie/${req.file.filename}`
+  //   : "";
   const newMovie = new Movie({ name, description, image, genre, director });
   await newMovie.save();
   return res.status(201).json(success(newMovie, "Successfully created movie."));

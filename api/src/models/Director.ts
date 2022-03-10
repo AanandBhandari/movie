@@ -16,14 +16,14 @@ DirectorSchema.post(
   async function (doc: Director, next: Function) {
     model("movie").deleteMany({ director: doc._id }).exec();
     //Remove director image
-    let image = doc.image;
-    if (image) {
-      image = image.replace(process.env.SITE, "");
-      let path = `${__dirname}/../public${image}`;
-      if (fs.existsSync(path)) {
-        fs.unlinkSync(path);
-      }
-    }
+    // let image = doc.image;
+    // if (image) {
+    //   image = image.replace(process.env.SITE, "");
+    //   let path = `${__dirname}/../public${image}`;
+    //   if (fs.existsSync(path)) {
+    //     fs.unlinkSync(path);
+    //   }
+    // }
     next();
   }
 );

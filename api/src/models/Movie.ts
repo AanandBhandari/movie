@@ -20,14 +20,14 @@ MovieSchema.post(
   { query: true, document: false },
   function (doc: Movie, next: Function) {
     //Remove movie image from storage
-    let image = doc.image;
-    if (image) {
-      image = image.replace(process.env.SITE, "");
-      let path = `${__dirname}/../public${image}`;
-      if (fs.existsSync(path)) {
-        fs.unlinkSync(path);
-      }
-    }
+    // let image = doc.image;
+    // if (image) {
+    //   image = image.replace(process.env.SITE, "");
+    //   let path = `${__dirname}/../public${image}`;
+    //   if (fs.existsSync(path)) {
+    //     fs.unlinkSync(path);
+    //   }
+    // }
     next();
   }
 );
