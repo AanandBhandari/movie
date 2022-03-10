@@ -12,7 +12,7 @@ const app: Application = express();
 //db connection
 dbConnection();
 //server middleware
-// app.use("/",express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public"));
 app.use(cors());
 app.use(express.json());
 app.use(
@@ -29,7 +29,7 @@ app.get("/test", async (req: Request, res: Response) => {
 });
 // static files and serve  react app
 if (process.env.NODE_ENV === 'production') {
-  app.use('/',express.static(path.join(__dirname, '../../frontend', 'build')));
+  app.use(express.static(path.join(__dirname, '../../frontend', 'build')));
   // app.use("/",express.static(__dirname + "/public"));
   
   app.get('/*', (req:Request, res:Response) => {
