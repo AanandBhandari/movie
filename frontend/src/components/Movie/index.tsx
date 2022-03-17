@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../../context";
 import type { MovieProps } from "./Move.type";
 import "./Movie.scss";
 
 const Movie = ({ movie }: MovieProps) => {
-  const { setContent, setVisible } = useContext<any>(Context);
   const navigate = useNavigate();
   return (
     <div className="movie" onClick={() => navigate(`/${movie._id}`)}>
@@ -13,17 +11,7 @@ const Movie = ({ movie }: MovieProps) => {
       <div className="movie__info">
         <h2 style={{ marginTop: 4 }}>{movie.name}</h2>
         <h5 style={{ color: "gray" }}>{movie.genre}</h5>
-        <p
-          className="movie__directorName"
-          role="button"
-          tabIndex={0}
-          onClick={() => {
-            setVisible("block");
-            setContent(movie.director);
-          }}
-        >
-          {movie.director.name}
-        </p>
+        <p className="movie__directorName">{movie.director.name}</p>
       </div>
     </div>
   );

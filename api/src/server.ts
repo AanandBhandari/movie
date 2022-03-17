@@ -33,14 +33,10 @@ if (process.env.NODE_ENV === 'production') {
   // app.use("/",express.static(__dirname + "/public"));
   
   app.get('/*', (req:Request, res:Response) => {
+    console.log('helloworlf')
     res.sendFile(path.join(__dirname, '../../frontend', 'build', 'index.html'));
   })
 }
-
-//404 error handler
-// app.use("*", (req: Request, res: Response) =>
-//   res.status(404).json(failure("Page not found."))
-// );
 
 // Global route error handling middleware
 app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {

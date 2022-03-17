@@ -33,13 +33,18 @@ const MovieDetail = () => {
     setIsFav(fav);
   }, [movie]);
 
+  useEffect(() => {
+    if (movies?.length) {
+      setFiltredMovies(
+        movies.filter((movie: MovieInterface) => movie._id !== id)
+      );
+    }
+  }, [movies]);
+
   const fetchMovie = async (id: string) => {
     setLoading(true);
     const movie = await getMovie(id);
     setMovie(movie);
-    setFiltredMovies(
-      movies.filter((movie: MovieInterface) => movie._id !== id)
-    );
     setLoading(false);
   };
 
@@ -51,6 +56,7 @@ const MovieDetail = () => {
   useEffect(() => {
     id && fetchMovie(id);
   }, [id]);
+  console.log({ movies });
 
   if (loading) {
     return <div>Loading...</div>;

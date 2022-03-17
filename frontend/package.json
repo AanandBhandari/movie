@@ -2,7 +2,7 @@
   "name": "Movie",
   "version": "1.0.0",
   "description": "create-react-app with typescript and webpack",
-  "homepage": "https://movie-lemon.vercel.app",
+  "homepage": "http://localhost:5002",
   "scripts": {
     "start": "webpack serve --config webpack/webpack.config.js --env env=dev",
     "build": "webpack --config webpack/webpack.config.js --env env=prod",
