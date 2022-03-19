@@ -7,6 +7,7 @@ MongoDB, Expressjs, React, Nodejs
 
 > Movie App is a fullstack application using MongoDB, Expressjs, React, Nodejs.
 
+
 ## clone or download
 ```terminal
 $ git clone https://github.com/AanandBhandari/movie.git
@@ -58,6 +59,9 @@ $ npm run test // run test cases of all apis using mocha
 $ npm run test-watch //this will test apis with watch mode
 $ npm run format // this will format code using prettier package
 ```
+
+# Hosted link of this project
+[Link to Hosted Application](https://movie-lemon.vercel.app/)
 # Screenshots of this project
 
 User visit public and Home page and see the list of movies
@@ -74,4 +78,6 @@ After going to detail page of the movie, user can open director profile in the m
 [Create new Issues](https://github.com/AanandBhandari/movie/issues) (preferred)
 
 Email Me: aanandbhandari143@gmail.com
+
+
 
