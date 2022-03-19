@@ -14,7 +14,6 @@ $ git clone https://github.com/AanandBhandari/movie.git
 
 ## project structure
 ```terminal
-LICENSE
 vercel.json
 api/
    package.json
@@ -48,19 +47,6 @@ $ npm run format // this will format the react code using prettier package
 ```
 
 ## Server-side usage
-
-### Prepare your secret
-
-run the script at the first level:
-
-(You need to add a JWT_SECRET in .env to connect to MongoDB)
-
-```terminal
-// in the root level
-$ echo "JWT_SECRET=YOUR_JWT_SECRET" >> ./server/src/.env
-```
-
-### Start
 
 ```terminal
 $ cd api   // go to api folder
