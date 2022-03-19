@@ -7,7 +7,6 @@ import {
   getMovie,
   getMovies,
 } from "../controllers/movie";
-// import { uploader } from "../middleware/uploader";
 const router = Router();
 
 router

@@ -9,18 +9,13 @@ const _validationResult = (req) => {
       messages.push(i);
     }
   }
-  if (messages.length > 0) {
-    console.log("****VALIDATION ERRORS****");
-    console.log(messages);
-  }
-
   return messages.map((error) => error.msg)[0] || "";
 };
 
 export const validator = (req, res, next) => {
   const message = _validationResult(req);
   if (message) {
-    return res.status(400).json(failure(message));
+    return res.status(403).json(failure(message));
   }
   next();
 };

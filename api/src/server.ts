@@ -30,21 +30,21 @@ app.get("/test", async (req: Request, res: Response) => {
 // static files and serve  react app
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../frontend', 'build')));
-  // app.use("/",express.static(__dirname + "/public"));
   
   app.get('/*', (req:Request, res:Response) => {
-    console.log('helloworlf')
     res.sendFile(path.join(__dirname, '../../frontend', 'build', 'index.html'));
   })
 }
 
 // Global route error handling middleware
 app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
-  console.log("****SERVER_ERROR****");
-  console.log(err);
+  // console.log("****SERVER_ERROR****");
+  // console.log(err);
   return res.status(500).json(failure(err.message || "Something went wrong!"));
 });
 
 const PORT = process.env.PORT || 5002;
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+
+export default app;

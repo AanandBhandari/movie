@@ -21,7 +21,6 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState<MovieInterface | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [filtredMovies, setFiltredMovies] = useState<MovieInterface[]>([]);
-
   const [isFav, setIsFav] = useState<boolean>(false);
   const { id } = useParams();
 
@@ -39,7 +38,7 @@ const MovieDetail = () => {
         movies.filter((movie: MovieInterface) => movie._id !== id)
       );
     }
-  }, [movies]);
+  }, [movies, id]);
 
   const fetchMovie = async (id: string) => {
     setLoading(true);
@@ -53,13 +52,30 @@ const MovieDetail = () => {
     setContent(director);
   };
 
+  const onClickFav = () => {
+    const favs = localStorage.getItem("fav") || "";
+    const isFav = favs?.includes(movie?._id);
+    let newFav: string;
+
+    if (isFav) {
+      newFav = favs.replace(movie?._id, "");
+      localStorage.setItem("fav", newFav);
+      toast.success("Removed from Favourites", toastStyle);
+    } else {
+      newFav = favs + movie?._id;
+      localStorage.setItem("fav", newFav);
+      toast.success("Added To Favourite", toastStyle);
+    }
+
+    setIsFav(!isFav);
+  };
+
   useEffect(() => {
     id && fetchMovie(id);
   }, [id]);
-  console.log({ movies });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <h4>Loading...</h4>;
   }
 
   return (
@@ -89,40 +105,9 @@ const MovieDetail = () => {
 
         <div>
           <p>{movie?.description}</p>
-          {isFav ? (
-            <button
-              onClick={() => {
-                const newFav: string | undefined = localStorage
-                  .getItem("fav")
-                  ?.split(",")
-                  .filter((id) => {
-                    return id.trim() !== movie?._id;
-                  })
-                  .join(",");
-
-                newFav && localStorage.setItem("fav", newFav);
-                setIsFav(false);
-                toast.success("Removed from Favourites", toastStyle);
-              }}
-              className="movieDetail__favouriteButton"
-            >
-              FAVOURITE
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                localStorage.setItem(
-                  "fav",
-                  `${localStorage.getItem("fav")}, ${movie?._id}`
-                );
-                setIsFav(true);
-                toast.success("Added To Favourite", toastStyle);
-              }}
-              className="movieDetail__favouriteButton"
-            >
-              ADD TO FAVOURITE
-            </button>
-          )}
+          <button onClick={onClickFav} className="movieDetail__favouriteButton">
+            {!isFav ? "ADD TO FAVOURITE" : "FAVOURITE"}
+          </button>
         </div>
         {filtredMovies.map((movie: MovieInterface) => (
           <div key={movie._id} className="movieDetail__similarMovies">

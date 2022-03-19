@@ -1,38 +1,34 @@
 import { Request, Response } from "express";
+import DirectorService from "../services/DirectorService";
+import MovieService from "../services/MovieService ";
 import { success, failure } from "../utils/helper";
-import Movie from "../models/Movie";
-import { Movie as MovieInterface } from "src/interfaces/Movie.interface";
+
+const Movie = new MovieService();
+const Director = new DirectorService();
 
 export const addMovie = async (req: Request, res: Response) => {
-  const { name, description, genre, director, image }: MovieInterface = req.body;
-
-  // if (!req.file) {
-  //   return res.status(403).json(failure("No image provided"));
-  // }
-
-  const user = await Movie.findOne({ name });
+  const user = await Movie.checkIfUserExit(req.body.name );
   if (user) {
-    return res.status(400).json(failure("Movie already exits."));
+    return res.status(403).json(failure("Movie already exits."));
   }
-  // const image = req.file
-  //   ? `${process.env.SITE}/movie/${req.file.filename}`
-  //   : "";
-  const newMovie = new Movie({ name, description, image, genre, director });
-  await newMovie.save();
+
+  const director = await Director.findById(req.body.director );
+  if (!director) {
+    return res.status(403).json(failure("Invalid director ID."));
+  }
+
+  const newMovie = await Movie.addMovie( req.body );
   return res.status(201).json(success(newMovie, "Successfully created movie."));
 };
 
 export const getMovies = async (req: Request, res: Response) => {
-  const movies = await Movie.find()
-    .select("-description")
-    .populate("director", "name")
-    .sort({ createdAt: -1 });
+  const movies = await Movie.getAll()
   return res.json(success(movies));
 };
 
 export const getMovie = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const movie = await Movie.findById(id).populate("director", "name");
+  const movie = await Movie.findById(id)
   if (!movie) {
     return res.status(404).json(failure("Movie not found."));
   }
@@ -41,6 +37,6 @@ export const getMovie = async (req: Request, res: Response) => {
 
 export const deleteMovie = async (req: Request, res: Response) => {
   const { id } = req.params;
-  await Movie.findOneAndDelete({_id: id});
-  return res.json(success("Successfully deleted movie."));
+  await Movie.deleteById(id);
+  return res.json(success(null,"Successfully deleted movie."));
 };

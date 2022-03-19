@@ -7,7 +7,6 @@ import {
   getDirector,
   getDirectors,
 } from "../controllers/director";
-// import { uploader } from "../middleware/uploader";
 const router = Router();
 
 router

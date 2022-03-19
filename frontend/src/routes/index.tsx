@@ -13,7 +13,6 @@ const Index = () => {
   useEffect(() => {
     fetchMovies();
   }, []);
-  console.log("heloo");
   return (
     <Router basename="/">
       <Routes>

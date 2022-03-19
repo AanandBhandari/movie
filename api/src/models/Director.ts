@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import fs from "fs";
 import { Director, DirectorModel } from "../interfaces/Director.interface";
 const DirectorSchema = new Schema(
   {
@@ -13,17 +12,21 @@ const DirectorSchema = new Schema(
 DirectorSchema.post(
   "findOneAndDelete",
   { query: true, document: false },
-  async function (doc: Director, next: Function) {
-    model("movie").deleteMany({ director: doc._id }).exec();
-    //Remove director image
-    // let image = doc.image;
-    // if (image) {
-    //   image = image.replace(process.env.SITE, "");
-    //   let path = `${__dirname}/../public${image}`;
-    //   if (fs.existsSync(path)) {
-    //     fs.unlinkSync(path);
-    //   }
-    // }
+  async function (doc: Director | null, next: Function) {
+    if(doc) {
+      model("movie").deleteMany({ director: doc._id }).exec();
+    }
+    next();
+  }
+);
+
+DirectorSchema.post(
+  "deleteMany",
+  { query: true, document: false },
+  async function (doc: any,  next: Function) {
+    if(doc) {
+      model("movie").deleteMany().exec();
+    }
     next();
   }
 );
