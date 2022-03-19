@@ -5,6 +5,7 @@ import { Movie as MovieInterface } from "../../interface/Movie.interface";
 import "./MovieList.scss";
 const MoviesList = () => {
   const { movies } = useContext<any>(Context);
+  console.log({ movies });
   return (
     <div>
       {movies.map((movie: MovieInterface) => (

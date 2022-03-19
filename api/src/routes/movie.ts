@@ -9,10 +9,7 @@ import {
 } from "../controllers/movie";
 const router = Router();
 
-router
-  .route("/")
-  .get(getMovies)
-  .post(movieSchema, validator, addMovie);
+router.route("/").get(getMovies).post(movieSchema, validator, addMovie);
 
 router.route("/:id").get(getMovie).delete(deleteMovie);
 

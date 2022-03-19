@@ -1,23 +1,22 @@
 import { Request, Response } from "express";
 import { success, failure } from "../utils/helper";
-import DirectorService from '../services/DirectorService';
+import DirectorService from "../services/DirectorService";
 
 const Director = new DirectorService();
 
 export const addDirector = async (req: Request, res: Response) => {
-
-  const user = await Director.checkIfUserExit( req.body.name );
+  const user = await Director.checkIfUserExit(req.body.name);
   if (user) {
     return res.status(403).json(failure("User already exits."));
   }
-  const newDirector = await Director.addDirector( req.body );
+  const newDirector = await Director.addDirector(req.body);
   return res
     .status(201)
     .json(success(newDirector, "Successfully created user."));
 };
 
 export const getDirectors = async (req: Request, res: Response) => {
-  let directors = await Director.getAll()
+  let directors = await Director.getAll();
   return res.json(success(directors));
 };
 

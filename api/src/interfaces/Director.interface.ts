@@ -6,5 +6,4 @@ export interface Director extends Document {
   description: string;
 }
 
-export interface DirectorModel extends Model<Director> {
-}
+export interface DirectorModel extends Model<Director> {}

@@ -14,5 +14,4 @@ const MovieSchema = new Schema(
   { timestamps: true }
 );
 
-
 export default model<Movie, MovieModel>("movie", MovieSchema);

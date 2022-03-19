@@ -5,8 +5,7 @@ export interface Movie extends Document {
   description: string;
   image?: string;
   genre: string;
-  director: Types.ObjectId;  
+  director: Types.ObjectId;
 }
 
-export interface MovieModel extends Model<Movie> {
-}
+export interface MovieModel extends Model<Movie> {}
